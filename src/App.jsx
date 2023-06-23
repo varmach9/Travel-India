@@ -17,7 +17,7 @@ const databaseURL = 'https://datausers-3257c-default-rtdb.firebaseio.com/.json'
 function App() {
   const [user,setUser]=useState({name:"undefined"})
   const [userName,setUserName]=useState("undefined")
-  const [placeName,setPlaceName]=useState("here")
+  const [placeName,setPlaceName]=useState("hyderabad")
   const [page,setpage]=useState(1)
 
   function handlecallbackresponse(res){

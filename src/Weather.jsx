@@ -80,8 +80,8 @@ const Weather = (props) => {
 
       return (
         <div key={date}>
-          <h4>{date}</h4>
-          <p>{calculateAverageTemperature(summary.temperature)}°C
+          
+          <p>{date}: {calculateAverageTemperature(summary.temperature)}°C
            and {highestWeatherType}<img src={getWeatherIcon(highestWeatherType)} alt="" width="20px" height="20px"/></p>
 
         </div>
@@ -139,9 +139,9 @@ const Weather = (props) => {
           <h3>Weather Forecast for {placeName}</h3>
           {weatherForecast ? (
             <div>
+              <p>The Near future weather forecast {getHighestWeatherType()}</p>
+          <p>Temperature is {calculateAverageTemperature2()}°C, so plan accordingly</p>
               {renderDailyWeatherSummary()}
-              <p>Highest Weather Type: {getHighestWeatherType()}</p>
-          <p>Average Temperature: {calculateAverageTemperature2()}°C</p>
             </div>
           ) : (
             <p>Loading weather forecast...</p>
