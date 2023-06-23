@@ -4,6 +4,7 @@ import Weather from "./Weather";
 import { PlaceContext } from "./Contexts/PlaceContext";
 import { Codes } from "./utilities/AirportCodes";
 import "./App.css";
+import "./animate.js"
 
 const PlaceDetails = () => {
   const [showform, setshowform] = useState(0);
@@ -22,15 +23,27 @@ const PlaceDetails = () => {
   const [placestovisit, setptv] = useState("");
   const [imagelist,setimagelist]=useState([])
 
-  const handleToggleCard = (event) => {
-    const cardHeader = event.currentTarget;
-    const cardBody = cardHeader.nextElementSibling;
-    cardHeader.classList.toggle('collapsed');
-    cardBody.classList.toggle('show');
-  };
+  const animationsetter=()=>{
+    var cardHeaders = document.querySelectorAll('.card-header');
+console.log("here1")
 
+cardHeaders.forEach(function(header) {
+  header.addEventListener('click', function() {
+    var target = this.dataset.target;
+    var collapseItem = document.querySelector(target);
+    var isActive = collapseItem.classList.contains('show');
+    console.log("here2")
+    if (isActive) {
+      collapseItem.classList.remove('show');
+    } else {
+      collapseItem.classList.add('show');
+    }
+  });
+});
+  }
   useEffect(() => {
     document.addEventListener('click', handleOutsideClick);
+    
     return () => {
       document.removeEventListener('click', handleOutsideClick);
     };
@@ -52,6 +65,7 @@ const PlaceDetails = () => {
         setplace_description(data[placeName]["place_desc"]);
         var s = data[placeName]["want_div"];
         document.getElementById("needdiv").innerHTML = s;
+        animationsetter()
         setptv(data[placeName]["places_to_visit"])
         setimagelist(data[placeName]["images"])
         

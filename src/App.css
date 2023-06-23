@@ -122,3 +122,15 @@ h2{font-size:medium;margin:0}
 div.card-body.article {
   color: brown;
 }
+
+.card-header {
+  cursor: pointer;
+}
+
+.collapse.show .card-body {
+  display: block;
+}
+
+.card-body {
+  display: none;
+}
