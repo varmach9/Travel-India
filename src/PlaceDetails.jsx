@@ -4,7 +4,6 @@ import Weather from "./Weather";
 import { PlaceContext } from "./Contexts/PlaceContext";
 import { Codes } from "./utilities/AirportCodes";
 import "./App.css";
-import "./animate.js"
 
 const PlaceDetails = () => {
   const [showform, setshowform] = useState(0);
