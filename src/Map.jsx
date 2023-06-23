@@ -83,9 +83,7 @@ const Map = (props) => {
         {placeName === "here" ? (
           <div>Search for a place</div>
         ) : (
-          <div style={{ marginTop: "30px" }}>
-            <div>Explore {placeName}</div>
-  
+          <div style={{ marginTop: "10px" }}>  
             <div
               id="map"
               style={{ height: "350px", width: props.width }}

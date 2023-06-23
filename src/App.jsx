@@ -18,7 +18,7 @@ function App() {
   const [user,setUser]=useState({name:"undefined"})
   const [userName,setUserName]=useState("undefined")
   const [placeName,setPlaceName]=useState("hyderabad")
-  const [page,setpage]=useState(2)
+  const [page,setpage]=useState(1)
 
   function handlecallbackresponse(res){
     var userObject=jwt_decode(res.credential)
@@ -54,10 +54,11 @@ function App() {
       <LoginContext.Provider value={{userName,setUserName}}>
       <PlaceContext.Provider value={{placeName,setPlaceName}}>
       <PageContext.Provider value={{page,setpage}}>
+      <div>
       <div id="signInDiv"></div>
 
       {(user.name!=="undefined") && 
-      <div>
+      <div >
         <img src={user.picture}></img>
         <div>{user.name}</div>
         <button onClick={signout} id="signout">Sign out</button>
@@ -65,45 +66,11 @@ function App() {
         <SearchBar></SearchBar>
         <hr></hr>
       
-        
+      </div> 
+      <div>
           {page===1?<Home/>:page===2?<PlannerPage/>:<PastPlans/>}
         
-              {/* <Route path="/" element={<Home />} />
-              <Route path="/plannerpage" element={<PlannerPage />} />
-              <Route path="/pastplans" element={<PastPlans/>} /> */}
-
-
-      {/* <button onClick={()=>{
-          console.log("start")
-          axios.get(databaseURL)
-            .then(function(response) {
-              console.log("get details from db respnse")
-              const data = response.data;
-              console.log('Data retrieved:', data);
-              if(user.name in data){console.log("user already in databse")}
-              else{
-                let k=user.name
-                const data = {};
-                data[user.name]=["hyderabad"];
-                console.log("dta to be written:",data)
-                axios.patch(databaseURL, data)
-                  .then(function(response) {
-                    console.log('Data written successfully!');
-                  })
-                  .catch(function(error) {
-                    console.error('Error writing data: ', error);
-                  });
-              }
-            })
-            .catch(function(error) {
-              console.log(" error while getting details from db respnse")
-              console.error('Error reading data:', error);
-            });
-            
-            console.log("starting to put data")
-            
-          console.log("end") 
-      /* }}>Test DB</button> */}
+      </div>
 
 
      <div>footer</div>

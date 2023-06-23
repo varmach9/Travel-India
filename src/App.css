@@ -134,3 +134,10 @@ div.card-body.article {
 .card-body {
   display: none;
 }
+
+.jj{
+  border-radius: 16px;
+}
+.jj{
+  filter: brightness(40%);
+}

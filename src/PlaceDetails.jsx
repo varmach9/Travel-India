@@ -4,16 +4,18 @@ import Weather from "./Weather";
 import { PlaceContext } from "./Contexts/PlaceContext";
 import { Codes } from "./utilities/AirportCodes";
 import "./App.css";
+import axios from "axios";
 
 const PlaceDetails = () => {
-  const [showform, setshowform] = useState(0);
-  const [source, setsource] = useState("");
+  const [showform, setshowform] = useState(1);
+  const [source, setsource] = useState("Bengaluru");
   const [sourcesetter, setsourcesetter] = useState("");
   const [days, setdays] = useState(3);
   const [dayssetter, setdayssetter] = useState(3);
-  const [startdate, setstartdate] = useState("03-07-2023");
-  const [startdatesetter, setstartdatesetter] = useState("03-07-2023");
+  const [startdate, setstartdate] = useState("2023-07-07");
+  const [startdatesetter, setstartdatesetter] = useState("2023-07-07");
   const { placeName } = useContext(PlaceContext);
+  const [userChoices,setUserChoices]=useState([])
 
   const [suggestions, setSuggestions] = useState([]);
   const suggestionsRef = useRef(null);
@@ -21,6 +23,14 @@ const PlaceDetails = () => {
   const [place_description, setplace_description] = useState("");
   const [placestovisit, setptv] = useState("");
   const [imagelist,setimagelist]=useState([])
+  const [placesData,setplacesData]=useState("ooo")
+  const [loaded,setloaded]=useState(0)
+// flight urls
+const base_url = "https://www.airindiaexpress.com/flight-availability?"
+const base_url_sj="https://www.spicejet.com/search?"
+const base_url_gofirst="https://book.flygofirst.com/Flight/Select?s=True&"
+
+
 
   const animationsetter=()=>{
     var cardHeaders = document.querySelectorAll('.card-header');
@@ -50,7 +60,7 @@ cardHeaders.forEach(function(header) {
 
   useEffect(() => {
     var databaseURL = 'https://placedata-a62fd-default-rtdb.firebaseio.com/placedata.json'; // Replace with your Firebase Realtime Database URL
-
+    // var famousPlacesDB="https://aiweb-80256-default-rtdb.firebaseio.com";
     // Make a GET request to the Firebase Realtime Database REST API
     fetch(databaseURL)
       .then(function(response) {
@@ -61,19 +71,36 @@ cardHeaders.forEach(function(header) {
         }
       })
       .then(function(data) {
-        setplace_description(data[placeName]["place_desc"]);
-        var s = data[placeName]["want_div"];
+        let placeNam=placeName==="banglore"?"bangalore":placeName;
+        setplace_description(data[placeNam]["place_desc"]);
+        var s = data[placeNam]["want_div"];
         document.getElementById("needdiv").innerHTML = s;
         animationsetter()
-        setptv(data[placeName]["places_to_visit"])
-        setimagelist(data[placeName]["images"])
-        
+        setptv(data[placeNam]["places_to_visit"])
+        setimagelist(data[placeNam]["images"])
       })
       .catch(function(error) {
-        console.log('Error reading data from Firebase Realtime Database:', error);
+        console.log('Error reading data from Firebase Realtime Database2:', error);
       });
       
-  }, [placeName]);
+  }, [placeName,showform]);
+
+  useEffect(()=>{
+    console.log(placeName,"saaa")
+    console.log(placesData)
+    axios
+    .get("https://aiweb-80256-default-rtdb.firebaseio.com/.json")
+    .then(function (response) {
+      const data = response.data;
+      setplacesData(data[placeName])
+      console.log(data[placeName])
+      setloaded(1)
+      console.log("loading set")
+  })
+  .catch(function(error) {
+    console.log('Error reading data from Firebase Realtime Database:', error);
+  });
+  },[placeName])
 
   const handleOutsideClick = (event) => {
     if (suggestionsRef.current && !suggestionsRef.current.contains(event.target)) {
@@ -97,7 +124,7 @@ cardHeaders.forEach(function(header) {
   };
 
   return (
-    <div style={{margin:"5%"}}>
+    <div style={{marginLeft:"4%",marginRight:"5%",marginTop:"20px"}}>
       {showform === 1 ? (
         <div>
           <form
@@ -154,11 +181,28 @@ cardHeaders.forEach(function(header) {
                 }}
               />
               <p>Selected date: {startdatesetter}</p>
+              <div>Select Places To be included:</div>
+              {placesData!=="ooo" && <div>{[1,2,3,4,5,6,7,8].map((k,v)=>{return <div style={{display:"flex"}}>
+
+                <div style={{textAlign:"left",marginLeft:"20%"}}><button onClick={(e)=>{
+                  document.getElementById(k).style.backgroundColor=(document.getElementById(k).style.backgroundColor==="green")?"":"green";
+                  if(document.getElementById(k).style.backgroundColor===""){
+                    userChoices.splice(userChoices.indexOf(k),1)
+                  }else{
+                    userChoices.push(k)
+                  }
+                  e.preventDefault()
+                  }} id={k}>✅︎</button> {k}. <a style={{fontWeight:"bold",color:"blue"}}> {placesData[`place${k}`]["name"]} </a> : {placesData[`place${k}`]["description"]}</div>
+                </div>})}
+                <div>Choices </div>
+                <div>{userChoices}</div>
+              </div>}
+              
             </div>
             {Object.keys(Codes).includes(sourcesetter) ? (
               <input type="submit" value="Submit" />
             ) : (
-              <div>none</div>
+              <div>.</div>
             )}
           </form>
         </div>
@@ -166,50 +210,99 @@ cardHeaders.forEach(function(header) {
         <div>
           <div>
             {placeName !== "here" ? ( window.screen.width>700 ?
-              <div style={{ display: "flex" }}>
-                <div style={{ width: "25%" }}>
-                  <div>
-                    <h1>{placeName}</h1>
-                    <div style={{fontSize:'15px',textAlign:"left"}}>{place_description}</div>
+            <div>
+              <div style={{color:"white",marginLeft:"12%",marginTop:"100px",position:"absolute",zIndex:1}}><h1 style={{fontSize:"50px",textAlign:"left"}}>{placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h1>
+              <div style={{fontSize:'20px',textAlign:"left",width:"80%",color:"white"}}>{place_description}</div>
+              </div>
+              <div ><img className="jj" style={{opacity:0.7}}src={(placeName==="hyderabad"||placeName==="mumbai"||placeName==="surat"|| placeName==="visakhapatnam"|| placeName==="thane")?imagelist["2"]:imagelist["0"]} alt="" width="80%" height="400px"></img></div>
+              <div style={{ display: "flex",marginLeft:"10%",marginTop:"50px"}}>
+                <div style={{ width: "25%"}}>
+                <div style={{textAlign:"left"}}>
+                    <h3>Flights from {source} to {placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h3>
+                    <div style={{display:"flex"}}>
+                      <div style={{marginLeft:"10px"}}><a href={`${base_url}/${Codes[source]}/${Codes[placeName]}/${startdate}`} target=" ">Air India</a></div>
+                      <div style={{marginLeft:"20px"}}><a target=" " href={`${base_url_sj}from=${Codes[source]}&to=${Codes[placeName]}&tripType=1&departure=${startdate}&adult=1&child=0&srCitizen=0&infant=0&currency=INR&redirectTo=/`}>Spice Jet</a></div>
+                    </div> 
+                    <div style={{display:"flex",marginTop:"10px"}}>
+                      <div style={{marginLeft:"10px"}}><a target=" " href={`${base_url_gofirst}o1=${Codes[source]}&d1=${Codes[placeName]}&ADT=1&dd1=${startdate}`}>GO First</a></div>
+                      <div style={{marginLeft:"20px"}}><a target=" " href={`https://www.skyscanner.co.in/transport/flights/${Codes[source]}/${Codes[placeName]}`}>Sky Scanner</a></div>
+                    </div>
+                    </div>
+                  {/* </div> */}
+                  <div style={{textAlign:"left"}}>
+                    <h3>Hotels in  {placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h3>
+                    <div style={{display:"flex"}}>
+                      <div style={{marginLeft:"10px"}}><a href={`https://in.hotels.com/Hotel-Search?adults=1&children=&destination=${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`} target=" ">Hotels.com</a></div>
+                      <div style={{marginLeft:"20px"}}><a target=" " href={`https://www.airbnb.co.in/s/${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`}>Airbnb</a></div>
+                    </div> 
+                    <div style={{display:"flex",marginTop:"10px"}}>
+                      <div style={{marginLeft:"10px"}}><a target=" " href={`https://www.holidify.com/places/${placeName}/hotels-where-to-stay.html`}>Holidify</a></div>
+                      
+                      <div style={{marginLeft:"20px"}}><a href={`https://www.expedia.co.in/Hotel-Search?adults=2&destination=${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`} target=" ">Expedia</a></div>
+                    </div>
                   </div>
-                  <Weather
-                    place={placeName}
-                    startdate={startdate}
-                    days={days}
-                  />
-                  <div>
-                    {placestovisit!==""?<div>{placestovisit.map((v,i)=>{return <div>
-                      <h4>{v}</h4>
-                      <img src={imagelist[String(i)]} alt="" height="100px"></img>
-                      </div>})}</div>:<div></div>}
+                  <Weather/>
+                  <div style={{textAlign:"left",marginTop:"100px"}}>
+                    <h3>Other Activities</h3>
+                    <div>Car Rental</div>
+                    <a href={`https://www.expedia.com/carsearch?date1=6/29/2023&date2=7/2/2023&drid1=&loc2=&locn=${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`} target=" ">Expedia</a>
                   </div>
                 </div>
-                <div style={{ width: "70%", marginLeft: "5%"}}>
+                <div style={{ width: "60%", marginLeft: "5%"}}>
+                  <div style={{textAlign:"left"}}>Plan You trip from Start to End</div>
                   <div>
-                    {source} to {placeName}
+                  {/* <h2 style={{textAlign:"left",color:"green",fontSize:"18px"}}>About:</h2>
+                    <div style={{fontSize:'14px',textAlign:"left"}}>{place_description}</div> */}
                   </div>
-                  <div>travel on {startdate}</div>
-                  <div>stay for {days} days</div>
-
+                  
+                  <div style={{display:"flex"}}>
+                  <div style={{marginRight:"10px",marginLeft:"10px",width:"400px",textAlign:"left"}}>
+                    <h3 style={{color:"green"}}>Your {days} - day Plan is Here...</h3>
+                  </div>
                   <Map width="350px"/>
+                  </div>
                   <h3 style={{textAlign:"left",color:"red"}}>
-                    More About {placeName} from internet
+                    More About {placeName} ...
                   </h3>
                   <div className="dropdown-content" id="needdiv" style={{ textAlign: "left" }}>
                     <div className="card"></div>
                   </div>
+                  <div>
+                    <h3 style={{textAlign:"left",color:"red"}}>Glimpse of {placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h3>
+                    {placestovisit!==""?<div style={{diaplay:"flex",flexWrap:"wrap"}}>{placestovisit.map((v,i)=>{return <div style={{width:"220px",float:"left",height:"230px"}}>
+                      <img src={imagelist[String(i)]} alt="" height="150px" width="200px"></img>
+                      <h4>{v}</h4>
+                      </div>})}</div>:<div></div>}
+                  </div>
                 </div>
+              </div>
               </div>:
               <div style={{width:"100%"}}>
                 <div style={{}}>
-                    <h1>{placeName}</h1>
-                    <div style={{fontSize:'15px',textAlign:"left"}}>{place_description}</div>
+                <div style={{color:"white",marginLeft:"5%",marginTop:"10px",position:"absolute",zIndex:1}}><h1 style={{fontSize:"30px",textAlign:"left"}}>{placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h1>
+              <div style={{fontSize:'15px',textAlign:"left",width:"90%",color:"white"}}>{place_description}</div>
+              </div>
+              <div ><img className="jj" style={{opacity:0.7}}src={(placeName==="hyderabad"||placeName==="mumbai"||placeName==="surat"|| placeName==="visakhapatnam"|| placeName==="thane")?imagelist["2"]:imagelist["0"]} alt="" width="100%" height="400px"></img></div>
+              
                   </div>
                 <div style={{ width: "100%", marginLeft: "0%"}}>
-                  <div>
-                    {source} to {placeName}
+                  <div style={{textAlign:"left"}}>
+                    <h3>Flights from {source} to {placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h3>
+                    <div style={{display:"flex"}}>
+                      <div style={{marginLeft:"10px"}}><a href={`${base_url}/${Codes[source]}/${Codes[placeName]}/${startdate}`} target=" ">Air India</a></div>
+                      <div style={{marginLeft:"10px"}}><a target=" " href={`${base_url_sj}from=${Codes[source]}&to=${Codes[placeName]}&tripType=1&departure=${startdate}&adult=1&child=0&srCitizen=0&infant=0&currency=INR&redirectTo=/`}>Spice Jet</a></div>
+                      <div style={{marginLeft:"10px"}}><a target=" " href={`${base_url_gofirst}o1=${Codes[source]}&d1=${Codes[placeName]}&ADT=1&dd1=${startdate}`}>GO First</a></div>
+                      <div style={{marginLeft:"10px"}}><a target=" " href={`https://www.skyscanner.co.in/transport/flights/${Codes[source]}/${Codes[placeName]}`}>Sky Scanner</a></div>
+                    </div>
                   </div>
-                  <div>travel on {startdate}</div>
+                  <div style={{textAlign:"left"}}>
+                    <h3>Hotels in  {placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h3>
+                    <div style={{display:"flex"}}>
+                      <div style={{marginLeft:"10px"}}><a href={`https://in.hotels.com/Hotel-Search?adults=1&children=&destination=${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`} target=" ">Hotels.com</a></div>
+                      <div style={{marginLeft:"10px"}}><a target=" " href={`https://www.airbnb.co.in/s/${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`}>Airbnb</a></div>
+                      <div style={{marginLeft:"10px"}}><a target=" " href={`https://www.holidify.com/places/${placeName}/hotels-where-to-stay.html`}>Holidify</a></div>
+                    </div>
+                  </div>
                   <div>stay for {days} days</div>
 
                   <Map width="100%"/>
@@ -221,11 +314,14 @@ cardHeaders.forEach(function(header) {
                   </div>
                 </div>
                 <div style={{ width: "100%" }}>
-                  <Weather
-                    place={placeName}
-                    startdate={startdate}
-                    days={days}
-                  />
+                  <Weather/>
+                  <div>
+                    <h3 style={{textAlign:"left",color:"red"}}>Glimpse of {placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h3>
+                    {placestovisit!==""?<div style={{diaplay:"flex",flexWrap:"wrap"}}>{placestovisit.map((v,i)=>{return <div style={{width:"100%",float:"left"}}>
+                      <img src={imagelist[String(i)]} alt="" width="70%"></img>
+                      <h4>{v}</h4>
+                      </div>})}</div>:<div></div>}
+                  </div>
                 </div>
               </div>
             ) : (
