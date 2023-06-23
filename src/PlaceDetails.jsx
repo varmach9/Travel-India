@@ -152,7 +152,7 @@ const PlaceDetails = () => {
       ) : (
         <div>
           <div>
-            {placeName !== "here" ? (
+            {placeName !== "here" ? ( window.screen.width>700 ?
               <div style={{ display: "flex" }}>
                 <div style={{ width: "25%" }}>
                   <div>
@@ -184,6 +184,40 @@ const PlaceDetails = () => {
                   </h3>
                   <div className="dropdown-content" id="needdiv" style={{ textAlign: "left" }}>
                     <div className="card"></div>
+                  </div>
+                </div>
+              </div>:
+              <div>
+                <div style={{ width: "100%", marginLeft: "5%"}}>
+                  <div>
+                    {source} to {placeName}
+                  </div>
+                  <div>travel on {startdate}</div>
+                  <div>stay for {days} days</div>
+
+                  <Map />
+                  <h3 style={{textAlign:"left",color:"red"}}>
+                    More About {placeName} from internet
+                  </h3>
+                  <div className="dropdown-content" id="needdiv" style={{ textAlign: "left" }}>
+                    <div className="card"></div>
+                  </div>
+                </div>
+                <div style={{ width: "100%" }}>
+                  <div>
+                    <h1>{placeName}</h1>
+                    <div style={{fontSize:'15px',textAlign:"left"}}>{place_description}</div>
+                  </div>
+                  <Weather
+                    place={placeName}
+                    startdate={startdate}
+                    days={days}
+                  />
+                  <div>
+                    {placestovisit!==""?<div>{placestovisit.map((v,i)=>{return <div>
+                      <h4>{v}</h4>
+                      <img src={imagelist[String(i)]} alt="" height="100px"></img>
+                      </div>})}</div>:<div></div>}
                   </div>
                 </div>
               </div>
