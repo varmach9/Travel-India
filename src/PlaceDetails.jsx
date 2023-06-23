@@ -6,7 +6,7 @@ import { Codes } from "./utilities/AirportCodes";
 import "./App.css";
 
 const PlaceDetails = () => {
-  const [showform, setshowform] = useState(1);
+  const [showform, setshowform] = useState(0);
   const [source, setsource] = useState("");
   const [sourcesetter, setsourcesetter] = useState("");
   const [days, setdays] = useState(3);
@@ -84,7 +84,7 @@ const PlaceDetails = () => {
   };
 
   return (
-    <div style={{margin:"50px"}}>
+    <div style={{margin:"5%"}}>
       {showform === 1 ? (
         <div>
           <form
@@ -178,7 +178,7 @@ const PlaceDetails = () => {
                   <div>travel on {startdate}</div>
                   <div>stay for {days} days</div>
 
-                  <Map />
+                  <Map width="350px"/>
                   <h3 style={{textAlign:"left",color:"red"}}>
                     More About {placeName} from internet
                   </h3>
@@ -187,15 +187,19 @@ const PlaceDetails = () => {
                   </div>
                 </div>
               </div>:
-              <div>
-                <div style={{ width: "100%", marginLeft: "5%"}}>
+              <div style={{width:"100%"}}>
+                <div style={{}}>
+                    <h1>{placeName}</h1>
+                    <div style={{fontSize:'15px',textAlign:"left"}}>{place_description}</div>
+                  </div>
+                <div style={{ width: "100%", marginLeft: "0%"}}>
                   <div>
                     {source} to {placeName}
                   </div>
                   <div>travel on {startdate}</div>
                   <div>stay for {days} days</div>
 
-                  <Map />
+                  <Map width="100%"/>
                   <h3 style={{textAlign:"left",color:"red"}}>
                     More About {placeName} from internet
                   </h3>
@@ -204,21 +208,11 @@ const PlaceDetails = () => {
                   </div>
                 </div>
                 <div style={{ width: "100%" }}>
-                  <div>
-                    <h1>{placeName}</h1>
-                    <div style={{fontSize:'15px',textAlign:"left"}}>{place_description}</div>
-                  </div>
                   <Weather
                     place={placeName}
                     startdate={startdate}
                     days={days}
                   />
-                  <div>
-                    {placestovisit!==""?<div>{placestovisit.map((v,i)=>{return <div>
-                      <h4>{v}</h4>
-                      <img src={imagelist[String(i)]} alt="" height="100px"></img>
-                      </div>})}</div>:<div></div>}
-                  </div>
                 </div>
               </div>
             ) : (

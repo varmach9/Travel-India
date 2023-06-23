@@ -18,7 +18,7 @@ function App() {
   const [user,setUser]=useState({name:"undefined"})
   const [userName,setUserName]=useState("undefined")
   const [placeName,setPlaceName]=useState("hyderabad")
-  const [page,setpage]=useState(1)
+  const [page,setpage]=useState(2)
 
   function handlecallbackresponse(res){
     var userObject=jwt_decode(res.credential)

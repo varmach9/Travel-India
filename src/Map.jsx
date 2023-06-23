@@ -4,7 +4,7 @@ import { PlaceContext } from "./Contexts/PlaceContext";
 import axios from "axios";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-const Map = () => {
+const Map = (props) => {
     const { placeName } = useContext(PlaceContext);
     console.log("pppp", placeName);
   
@@ -88,7 +88,7 @@ const Map = () => {
   
             <div
               id="map"
-              style={{ height: "350px", width: "500px" }}
+              style={{ height: "350px", width: props.width }}
               ref={mapRef}
             ></div>
           </div>
