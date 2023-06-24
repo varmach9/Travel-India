@@ -50,7 +50,7 @@ function App() {
     // e.preventDefault()
   }
   return (
-    <div className="App">
+    <div className="App" style={{margin:"2%"}}>
       <LoginContext.Provider value={{userName,setUserName}}>
       <PlaceContext.Provider value={{placeName,setPlaceName}}>
       <PageContext.Provider value={{page,setpage}}> <div>
@@ -60,15 +60,15 @@ function App() {
       
       {(user.name!=="undefined") && 
         <div style={{display:"flex",width:"80%", justifyContent:"right"}}>
+        {window.screen.width>800 &&  <SearchBar></SearchBar>}
         <div style={{height:"25px",marginTop:"10px",marginRight:`${window.screen.width>1000?30:10}px`,fontSize:`16px`}}> Welcome {user.name} </div>
         <div><div><img src={user.picture} alt="T-I" style={{width:"50px",borderRadius:"50%"}}></img></div>
         <button  style={{height:"20px",fontSize:"10px"}}onClick={signout} id="signout">Log out</button>
         </div></div>}
         </div>
-
-        <SearchBar></SearchBar>
+        {window.screen.width<=800 &&  <SearchBar></SearchBar>}
         <hr></hr>
-      
+
       </div> 
       <div>
           {page===1?<Home/>:page===2?<PlannerPage/>:<PastPlans/>}

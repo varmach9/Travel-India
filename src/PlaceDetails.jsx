@@ -283,15 +283,15 @@ cardHeaders.forEach(function(header) {
               </div>:
               <div style={{width:"100%"}}>
                 <div style={{}}>
-                <div style={{color:"white",marginLeft:"5%",marginTop:`${(window.screen.width>500)?15:30}%`,position:"absolute",zIndex:1}}><h1 style={{fontSize:"30px",textAlign:"left"}}>{placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h1>
+                <div style={{color:"white",marginLeft:"5%",marginTop:`${(window.screen.width>500)?5:20}%`,position:"absolute",zIndex:1}}><h1 style={{fontSize:"30px",textAlign:"left"}}>{placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h1>
               <div style={{fontSize:`${(window.screen.width>500)?16:12}px`,textAlign:"left",width:"90%",color:"white"}}>{place_description.slice(0,584)}</div>
               </div>
-              <div ><img className="jj" src={(placeName==="hyderabad"||placeName==="mumbai"||placeName==="surat"|| placeName==="visakhapatnam"|| placeName==="thane")?imagelist["2"]:imagelist["0"]} alt="" width="100%" height="400px"></img></div>
+              <div ><img className="jj" src={(placeName==="hyderabad"||placeName==="mumbai"||placeName==="surat"|| placeName==="visakhapatnam"|| placeName==="thane")?imagelist["2"]:imagelist["0"]} alt="" width="100%" height="300px"></img></div>
               
                   </div>
                 <div style={{ width: "100%", marginLeft: "0%"}}>
                 <div style={{textAlign:"left"}}>
-                    <h3>Flights from {source} to {placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h3>
+                    <h4>Flights from {source} to {placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h4>
                     <div style={{display:"flex"}}>
                       <div style={{marginLeft:"15%"}}><a href={`${base_url}/${Codes[source]}/${Codes[placeName]}/${startdate}`} target=" ">
                         {/* <div>Air India</div> */}
@@ -310,7 +310,7 @@ cardHeaders.forEach(function(header) {
                     </div>
                   {/* </div> */}
                   <div style={{textAlign:"left"}}>
-                    <h3>Hotels in  {placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h3>
+                    <h4>Hotels in  {placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h4>
                     <div style={{display:"flex"}}>
                       <div style={{marginLeft:"10%"}}><a href={`https://in.hotels.com/Hotel-Search?adults=1&children=&destination=${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`} target=" ">
                       <img src="hotels.jpeg" alt="" width="100px"></img></a></div>

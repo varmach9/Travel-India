@@ -52,8 +52,7 @@ const SearchBar = () => {
     }
   };
   return (
-    <div className="search-bar">
-      {/* <div>{userName}</div> */}
+    <div className="search-bar" style={{marginRight:'20%',marginTop:"10px"}}>
       <input
         type="text"
         value={searchTerm}
@@ -82,10 +81,6 @@ const SearchBar = () => {
           else{alert("enter proper city name")}
           e.preventDefault()
         }}>Plan Trip</button>:<button>Plan-Trip</button>}
-      
-      <div>
-        <button onClick={(e)=>{setpage(3);e.preventDefault()}}>test button</button>
-      </div>
     </div>
   );
 };
