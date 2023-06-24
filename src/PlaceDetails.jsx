@@ -216,7 +216,7 @@ cardHeaders.forEach(function(header) {
             </div>
               <div ><img className="jj" src={(placeName==="hyderabad"||placeName==="mumbai"||placeName==="surat"|| placeName==="visakhapatnam"|| placeName==="thane")?imagelist["2"]:imagelist["0"]} alt="" width="80%" height="500px"></img></div>
               <div style={{ display: "flex",marginLeft:"10%",marginTop:"50px"}}>
-                <div style={{ width: "400px"}}>
+                <div style={{ width: "330px"}}>
                 <div style={{textAlign:"left"}}>
                     <h3>Flights from {source} to {placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h3>
                     <div style={{display:"flex"}}>
@@ -253,17 +253,29 @@ cardHeaders.forEach(function(header) {
                   <Weather/>
                   <div style={{textAlign:"left",marginTop:"100px"}}>
                     <h3>Other Activities</h3>
-                    <div>Car Rental</div>
-                    <a href={`https://www.expedia.com/carsearch?date1=6/29/2023&date2=7/2/2023&drid1=&loc2=&locn=${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`} target=" ">Expedia</a>
+                    <div style={{marginBottom:"20px"}}>Car Rental</div>
+                    <a href={`https://www.expedia.com/carsearch?date1=6/29/2023&date2=7/2/2023&drid1=&loc2=&locn=${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`} target=" ">
+                      <img src="expediacars.png" alt="" width="100px"></img>
+                    </a>
+                    <a href={`https://www.justdial.com/${placeName.charAt(0).toUpperCase() + placeName.slice(1)}/Car-Rental`} target=" ">
+                      <img src="justdial.png" alt="" width="100px" style={{marginLeft:"20px"}}></img>
+                    </a>
                   </div>
                 </div>
                 <div style={{ width: "60%", marginLeft: "5%"}}>
-                  <div style={{textAlign:"left"}}>Plan You trip from Start to End</div>
-                  <div style={{display:"flex"}}>
-                  <div style={{marginRight:"10px",marginLeft:"1px",width:"400px",textAlign:"left"}}>
-                    <h3 style={{color:"green",width:"400px"}}>Your {days} - day Plan is Here...</h3>
+                  <div style={{justifyContent:"right",display:"flex",marginRight:"100px"}}>
+                    <div style={{width:"100px",marginLeft:"10px"}}>Save this plan</div>
+                    <div style={{width:"100px",marginLeft:"10px"}}>Invite a friend</div>
+                    <div style={{width:"100px",marginLeft:"10px"}}>Download</div>
                   </div>
-                  <Map width="350px"/>
+                  <div style={{textAlign:"left"}}>Plan You trip from Start to End</div>
+                  <div style={{display:`${window.screen.width>1400 ?"flex":""}`}}>
+                  <div style={{marginRight:"10px",marginLeft:"1px",width:"350px",textAlign:"left"}}>
+                    <h3 style={{color:"green",width:"350px"}}>Your {days} - day Plan is Here...</h3>
+                    {Array.apply(null, Array(days)).map((v,k)=>{return <div>day-{k+1}</div>})}
+                    {userChoices.length}
+                  </div>
+                  <Map width={`${window.screen.width>1400 ?"350px":"100%"}`}/>
                   </div>
                   <h3 style={{textAlign:"left",color:"red"}}>
                     More About {placeName} ...
@@ -283,8 +295,8 @@ cardHeaders.forEach(function(header) {
               </div>:
               <div style={{width:"100%"}}>
                 <div style={{}}>
-                <div style={{color:"white",marginLeft:"5%",marginTop:`${(window.screen.width>500)?5:20}%`,position:"absolute",zIndex:1}}><h1 style={{fontSize:"30px",textAlign:"left"}}>{placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h1>
-              <div style={{fontSize:`${(window.screen.width>500)?16:12}px`,textAlign:"left",width:"90%",color:"white"}}>{place_description.slice(0,584)}</div>
+                <div style={{color:"white",marginLeft:"5%",marginTop:`${(window.screen.width>500)?5:20}%`,position:"absolute",zIndex:1}}><h1 style={{fontSize:"20px",textAlign:"left"}}>{placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h1>
+              <div style={{fontSize:`${(window.screen.width>500)?16:11}px`,textAlign:"left",width:"90%",color:"white"}}>{place_description.slice(0,584)}</div>
               </div>
               <div ><img className="jj" src={(placeName==="hyderabad"||placeName==="mumbai"||placeName==="surat"|| placeName==="visakhapatnam"|| placeName==="thane")?imagelist["2"]:imagelist["0"]} alt="" width="100%" height="300px"></img></div>
               
@@ -294,7 +306,7 @@ cardHeaders.forEach(function(header) {
                     <h4>Flights from {source} to {placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h4>
                     <div style={{display:"flex"}}>
                       <div style={{marginLeft:"15%"}}><a href={`${base_url}/${Codes[source]}/${Codes[placeName]}/${startdate}`} target=" ">
-                        {/* <div>Air India</div> */}
+                        
                         <img src="airindia.png" alt="" width="60px"></img>
                         </a></div>
                       <div style={{marginLeft:"20%"}}><a target=" " href={`${base_url_sj}from=${Codes[source]}&to=${Codes[placeName]}&tripType=1&departure=${startdate}&adult=1&child=0&srCitizen=0&infant=0&currency=INR&redirectTo=/`}>
@@ -308,7 +320,6 @@ cardHeaders.forEach(function(header) {
                       
                     </div>
                     </div>
-                  {/* </div> */}
                   <div style={{textAlign:"left"}}>
                     <h4>Hotels in  {placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h4>
                     <div style={{display:"flex"}}>

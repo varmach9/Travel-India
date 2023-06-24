@@ -141,3 +141,82 @@ div.card-body.article {
 .jj{
   filter: brightness(40%);
 }
+
+input[type="text"] {
+  padding: 10px;
+  width: 220px;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  font-size: 16px;
+}
+
+@media screen and (max-width:700px) {
+  input[type="text"] {
+    padding: 10px 10px;
+    width: 100px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    font-size: 16px;
+  }
+}
+
+.suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 200px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  list-style-type: none;
+}
+
+.suggestions .suggestion {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestions .suggestion:hover {
+  background-color: #7f4bf7;
+  border-radius: 30px;
+}
+
+button {
+  padding: 5px 5px;
+  background-color: #75ea43;
+  border: none;
+  border-radius: 60px;
+  margin-left: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+button:hover {
+  background-color: green;
+}
+
+.dropdown-contenta {
+/* display: block; */
+position: absolute;
+background-color: #f9f9f9;
+min-width: 60px;
+box-shadow: 4px 8px 16px 0px rgba(0,0,0,0.2);
+padding: 5px 12px;
+z-index: 1;
+}
+
+@media screen and (max-width:700px){
+  .dropdown-contenta {
+    position: relative;
+    background-color: #f9f9f9;
+    min-width: 55px;
+    box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
+    padding: 10px 0px;
+    z-index: 1;
+    font-weight: 1px;
+    }
+}
+.showa {
+  display: none;
+}
+

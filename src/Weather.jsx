@@ -133,7 +133,7 @@ const Weather = (props) => {
   };
 
   return (
-    <div>
+    <div style={{textAlign:"left"}}>
       {placeName !== 'here' ? (
         <div>
           <h3>Weather Forecast for {placeName}</h3>

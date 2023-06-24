@@ -52,8 +52,8 @@ const SearchBar = () => {
     }
   };
   return (
-    <div className="search-bar" style={{marginRight:'20%',marginTop:"10px"}}>
-      <input
+    <div className="search-bar" style={{marginRight:'20px'}}>
+      <input className='input-box'
         type="text"
         value={searchTerm}
         onChange={handleChange}
@@ -80,7 +80,7 @@ const SearchBar = () => {
           }
           else{alert("enter proper city name")}
           e.preventDefault()
-        }}>Plan Trip</button>:<button>Plan-Trip</button>}
+        }}>🔍</button>:<button>🔍</button>}
     </div>
   );
 };

@@ -46,7 +46,7 @@ const Map = (props) => {
   
           const map = L.map(mapRef.current).setView(
             [coordinates.latitude, coordinates.longitude],
-            12
+            11
           );
   
           L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
