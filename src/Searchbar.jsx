@@ -18,6 +18,7 @@ const SearchBar = () => {
   .then(function(response) {
     const data = response.data;
     places=Object.keys(data)
+    places.splice(places.indexOf("coord"),1)
   })
   .catch(function(error) {
     console.error('Error retrieving data:', error);
@@ -60,7 +61,7 @@ const SearchBar = () => {
         placeholder="Search for a place..."
       />
       {suggestions.length > 0 && (
-        <ul className="suggestions" ref={suggestionsRef}>
+        <ul className="suggestions1" ref={suggestionsRef}>
           {suggestions.map((suggestion, index) => (
             <li
               key={index}
@@ -74,13 +75,13 @@ const SearchBar = () => {
       )}
       {places.includes(searchTerm)?
       
-        <button onClick={(e)=>{
+        <button className="b1" onClick={(e)=>{
           if(places.includes(searchTerm)){setPlaceName(searchTerm);
             setpage(2)
           }
           else{alert("enter proper city name")}
           e.preventDefault()
-        }}>🔍</button>:<button>🔍</button>}
+        }}>🔍</button>:<button className="b1">🔍</button>}
     </div>
   );
 };

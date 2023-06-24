@@ -40,13 +40,32 @@
   position: relative;
   display: inline-block;
 }
+.search-bar1 {
+  position: relative;
+  display: inline-block;
+}
 
 .suggestions {
   position: absolute;
   top: 100%;
-  left: 0;
+  right: 40px;
   z-index: 10;
-  width: 100%;
+  width: 50%;
+  padding: 0;
+  margin-top: 4px;
+  list-style: none;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.suggestions1 {
+  position: absolute;
+  top: 100%;
+  right: 40px;
+  z-index: 10;
+  width: 50%;
   padding: 0;
   margin-top: 4px;
   list-style: none;
@@ -163,28 +182,28 @@ input[type="text"] {
   }
 }
 
-.suggestions {
+.suggestions1 {
   position: absolute;
   top: 100%;
-  left: 0;
   width: 200px;
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 30px;
   list-style-type: none;
+  z-index: 2;
 }
 
-.suggestions .suggestion {
+.suggestions1 .suggestion {
   padding: 10px;
   cursor: pointer;
 }
 
-.suggestions .suggestion:hover {
+.suggestions1 .suggestion:hover {
   background-color: #7f4bf7;
   border-radius: 30px;
 }
 
-button {
+button.b1{
   padding: 5px 5px;
   background-color: #75ea43;
   border: none;
@@ -194,7 +213,7 @@ button {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-button:hover {
+button.b1:hover {
   background-color: green;
 }
 

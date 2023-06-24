@@ -136,7 +136,7 @@ cardHeaders.forEach(function(header) {
               e.preventDefault();
             }}
           >
-            <div className="search-bar">
+            <div className="search-bar1">
               <label>Enter Source Location</label>
               <input
                 type="text"
@@ -184,7 +184,7 @@ cardHeaders.forEach(function(header) {
               <div>Select Places To be included:</div>
               {placesData!=="ooo" && <div>{[1,2,3,4,5,6,7,8].map((k,v)=>{return <div style={{display:"flex"}}>
 
-                <div style={{textAlign:"left",marginLeft:"20%"}}><button onClick={(e)=>{
+                <div style={{textAlign:"left",marginLeft:"20%"}}><button className="selbutton" onClick={(e)=>{
                   document.getElementById(k).style.backgroundColor=(document.getElementById(k).style.backgroundColor==="green")?"":"green";
                   if(document.getElementById(k).style.backgroundColor===""){
                     userChoices.splice(userChoices.indexOf(k),1)
