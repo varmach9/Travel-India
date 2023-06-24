@@ -112,7 +112,7 @@ span.clickable.align-middle{display:none}
 
 div.card-body.article a{
   display:none;
-  padding:0
+  padding:0;
 }
 .card-header{margin:0}
 
@@ -139,7 +139,10 @@ div.card-body.article {
   border-radius: 16px;
 }
 .jj{
-  filter: brightness(40%);
+  filter: brightness(70%);
+}
+.jj:hover{
+  filter: brightness(40%)
 }
 
 input[type="text"] {

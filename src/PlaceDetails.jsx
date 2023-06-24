@@ -7,7 +7,7 @@ import "./App.css";
 import axios from "axios";
 
 const PlaceDetails = () => {
-  const [showform, setshowform] = useState(0);
+  const [showform, setshowform] = useState(1);
   const [source, setsource] = useState("Bengaluru");
   const [sourcesetter, setsourcesetter] = useState("");
   const [days, setdays] = useState(3);
@@ -270,7 +270,7 @@ cardHeaders.forEach(function(header) {
                   </div>
                   <div style={{textAlign:"left"}}>Plan You trip from Start to End</div>
                   <div style={{display:`${window.screen.width>1400 ?"flex":""}`}}>
-                  <div style={{marginRight:"10px",marginLeft:"1px",width:"350px",textAlign:"left"}}>
+                  <div style={{marginRight:"10px",marginLeft:"1px",width:"380px",textAlign:"left"}}>
                     <h3 style={{color:"green",width:"350px"}}>Your {days} - day Plan is Here...</h3>
                     {Array.apply(null, Array(days)).map((v,k)=>{return <div>day-{k+1}</div>})}
                     {userChoices.length}
