@@ -50,7 +50,7 @@ function App() {
     // e.preventDefault()
   }
   return (
-    <div className="App" style={{margin:"2%"}}>
+    <div className="App" style={{margin:"4%"}}>
       <LoginContext.Provider value={{userName,setUserName}}>
       <PlaceContext.Provider value={{placeName,setPlaceName}}>
       <PageContext.Provider value={{page,setpage}}> <div>
