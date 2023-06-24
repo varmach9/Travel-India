@@ -7,7 +7,7 @@ import "./App.css";
 import axios from "axios";
 
 const PlaceDetails = () => {
-  const [showform, setshowform] = useState(1);
+  const [showform, setshowform] = useState(0);
   const [source, setsource] = useState("Bengaluru");
   const [sourcesetter, setsourcesetter] = useState("");
   const [days, setdays] = useState(3);
@@ -124,7 +124,7 @@ cardHeaders.forEach(function(header) {
   };
 
   return (
-    <div style={{marginLeft:"4%",marginRight:"5%",marginTop:"20px"}}>
+    <div style={{marginLeft:"0%",marginRight:"0%",marginTop:"20px"}}>
       {showform === 1 ? (
         <div>
           <form
@@ -209,36 +209,45 @@ cardHeaders.forEach(function(header) {
       ) : (
         <div>
           <div>
-            {placeName !== "here" ? ( window.screen.width>700 ?
+            {placeName !== "here" ? ( window.screen.width>1000 ?
             <div>
-              <div style={{color:"white",marginLeft:"12%",marginTop:"100px",position:"absolute",zIndex:1}}><h1 style={{fontSize:"50px",textAlign:"left"}}>{placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h1>
-              <div style={{fontSize:'20px',textAlign:"left",width:"80%",color:"white"}}>{place_description}</div>
-              </div>
-              <div ><img className="jj" style={{opacity:0.7}}src={(placeName==="hyderabad"||placeName==="mumbai"||placeName==="surat"|| placeName==="visakhapatnam"|| placeName==="thane")?imagelist["2"]:imagelist["0"]} alt="" width="80%" height="400px"></img></div>
+              <div style={{color:"white",marginLeft:"12%",marginTop:"16%",position:"absolute",zIndex:1}}><h1 style={{fontSize:"50px",textAlign:"left"}}>{placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h1>
+              <div style={{fontSize:'16px',textAlign:"left",width:"80%",color:"white"}}>{place_description.slice(0,584)}</div>
+            </div>
+              <div ><img className="jj" src={(placeName==="hyderabad"||placeName==="mumbai"||placeName==="surat"|| placeName==="visakhapatnam"|| placeName==="thane")?imagelist["2"]:imagelist["0"]} alt="" width="80%" height="500px"></img></div>
               <div style={{ display: "flex",marginLeft:"10%",marginTop:"50px"}}>
-                <div style={{ width: "25%"}}>
+                <div style={{ width: "400px"}}>
                 <div style={{textAlign:"left"}}>
                     <h3>Flights from {source} to {placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h3>
                     <div style={{display:"flex"}}>
-                      <div style={{marginLeft:"10px"}}><a href={`${base_url}/${Codes[source]}/${Codes[placeName]}/${startdate}`} target=" ">Air India</a></div>
-                      <div style={{marginLeft:"20px"}}><a target=" " href={`${base_url_sj}from=${Codes[source]}&to=${Codes[placeName]}&tripType=1&departure=${startdate}&adult=1&child=0&srCitizen=0&infant=0&currency=INR&redirectTo=/`}>Spice Jet</a></div>
+                      <div style={{marginLeft:"30px"}}><a href={`${base_url}/${Codes[source]}/${Codes[placeName]}/${startdate}`} target=" ">
+                        {/* <div>Air India</div> */}
+                        <img src="airindia.png" alt="" width="60px"></img>
+                        </a></div>
+                      <div style={{marginLeft:"50px"}}><a target=" " href={`${base_url_sj}from=${Codes[source]}&to=${Codes[placeName]}&tripType=1&departure=${startdate}&adult=1&child=0&srCitizen=0&infant=0&currency=INR&redirectTo=/`}>
+                        <img src="spicejet.png" alt="" width="120px"></img></a></div>
                     </div> 
                     <div style={{display:"flex",marginTop:"10px"}}>
-                      <div style={{marginLeft:"10px"}}><a target=" " href={`${base_url_gofirst}o1=${Codes[source]}&d1=${Codes[placeName]}&ADT=1&dd1=${startdate}`}>GO First</a></div>
-                      <div style={{marginLeft:"20px"}}><a target=" " href={`https://www.skyscanner.co.in/transport/flights/${Codes[source]}/${Codes[placeName]}`}>Sky Scanner</a></div>
+                      <div style={{marginLeft:"10px"}}><a target=" " href={`https://www.skyscanner.co.in/transport/flights/${Codes[source]}/${Codes[placeName]}`}>
+                      <img src="skyscanner.png" alt="" width="120px"></img></a></div>
+                      <div style={{marginLeft:"50px"}}><a target=" " href={`${base_url_gofirst}o1=${Codes[source]}&d1=${Codes[placeName]}&ADT=1&dd1=${startdate}`}>
+                      <img src="gofirst.jpeg" alt="" width="60px"></img></a></div>
+                      
                     </div>
                     </div>
-                  {/* </div> */}
                   <div style={{textAlign:"left"}}>
                     <h3>Hotels in  {placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h3>
                     <div style={{display:"flex"}}>
-                      <div style={{marginLeft:"10px"}}><a href={`https://in.hotels.com/Hotel-Search?adults=1&children=&destination=${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`} target=" ">Hotels.com</a></div>
-                      <div style={{marginLeft:"20px"}}><a target=" " href={`https://www.airbnb.co.in/s/${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`}>Airbnb</a></div>
+                      <div style={{marginLeft:"20px"}}><a href={`https://in.hotels.com/Hotel-Search?adults=1&children=&destination=${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`} target=" ">
+                      <img src="hotels.jpeg" alt="" width="100px"></img></a></div>
+                      <div style={{marginLeft:"60px"}}><a target=" " href={`https://www.airbnb.co.in/s/${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`}>
+                      <img src="airbnb.png" alt="" width="60px" height="70px"></img></a></div>
                     </div> 
                     <div style={{display:"flex",marginTop:"10px"}}>
-                      <div style={{marginLeft:"10px"}}><a target=" " href={`https://www.holidify.com/places/${placeName}/hotels-where-to-stay.html`}>Holidify</a></div>
-                      
-                      <div style={{marginLeft:"20px"}}><a href={`https://www.expedia.co.in/Hotel-Search?adults=2&destination=${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`} target=" ">Expedia</a></div>
+                      <div style={{marginLeft:"20px"}}><a target=" " href={`https://www.holidify.com/places/${placeName}/hotels-where-to-stay.html`}>
+                      <img src="holidify.png" alt="" width="100px"></img></a></div>
+                      <div style={{marginLeft:"50px"}}><a href={`https://www.expedia.co.in/Hotel-Search?adults=2&destination=${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`} target=" ">
+                      <img src="expedia.jpeg" alt="" width="80px"></img></a></div>
                     </div>
                   </div>
                   <Weather/>
@@ -250,14 +259,9 @@ cardHeaders.forEach(function(header) {
                 </div>
                 <div style={{ width: "60%", marginLeft: "5%"}}>
                   <div style={{textAlign:"left"}}>Plan You trip from Start to End</div>
-                  <div>
-                  {/* <h2 style={{textAlign:"left",color:"green",fontSize:"18px"}}>About:</h2>
-                    <div style={{fontSize:'14px',textAlign:"left"}}>{place_description}</div> */}
-                  </div>
-                  
                   <div style={{display:"flex"}}>
-                  <div style={{marginRight:"10px",marginLeft:"10px",width:"400px",textAlign:"left"}}>
-                    <h3 style={{color:"green"}}>Your {days} - day Plan is Here...</h3>
+                  <div style={{marginRight:"10px",marginLeft:"1px",width:"400px",textAlign:"left"}}>
+                    <h3 style={{color:"green",width:"400px"}}>Your {days} - day Plan is Here...</h3>
                   </div>
                   <Map width="350px"/>
                   </div>
@@ -279,30 +283,48 @@ cardHeaders.forEach(function(header) {
               </div>:
               <div style={{width:"100%"}}>
                 <div style={{}}>
-                <div style={{color:"white",marginLeft:"5%",marginTop:"10px",position:"absolute",zIndex:1}}><h1 style={{fontSize:"30px",textAlign:"left"}}>{placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h1>
-              <div style={{fontSize:'15px',textAlign:"left",width:"90%",color:"white"}}>{place_description}</div>
+                <div style={{color:"white",marginLeft:"5%",marginTop:`${(window.screen.width>500)?15:30}%`,position:"absolute",zIndex:1}}><h1 style={{fontSize:"30px",textAlign:"left"}}>{placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h1>
+              <div style={{fontSize:`${(window.screen.width>500)?16:12}px`,textAlign:"left",width:"90%",color:"white"}}>{place_description.slice(0,584)}</div>
               </div>
-              <div ><img className="jj" style={{opacity:0.7}}src={(placeName==="hyderabad"||placeName==="mumbai"||placeName==="surat"|| placeName==="visakhapatnam"|| placeName==="thane")?imagelist["2"]:imagelist["0"]} alt="" width="100%" height="400px"></img></div>
+              <div ><img className="jj" src={(placeName==="hyderabad"||placeName==="mumbai"||placeName==="surat"|| placeName==="visakhapatnam"|| placeName==="thane")?imagelist["2"]:imagelist["0"]} alt="" width="100%" height="400px"></img></div>
               
                   </div>
                 <div style={{ width: "100%", marginLeft: "0%"}}>
-                  <div style={{textAlign:"left"}}>
+                <div style={{textAlign:"left"}}>
                     <h3>Flights from {source} to {placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h3>
                     <div style={{display:"flex"}}>
-                      <div style={{marginLeft:"10px"}}><a href={`${base_url}/${Codes[source]}/${Codes[placeName]}/${startdate}`} target=" ">Air India</a></div>
-                      <div style={{marginLeft:"10px"}}><a target=" " href={`${base_url_sj}from=${Codes[source]}&to=${Codes[placeName]}&tripType=1&departure=${startdate}&adult=1&child=0&srCitizen=0&infant=0&currency=INR&redirectTo=/`}>Spice Jet</a></div>
-                      <div style={{marginLeft:"10px"}}><a target=" " href={`${base_url_gofirst}o1=${Codes[source]}&d1=${Codes[placeName]}&ADT=1&dd1=${startdate}`}>GO First</a></div>
-                      <div style={{marginLeft:"10px"}}><a target=" " href={`https://www.skyscanner.co.in/transport/flights/${Codes[source]}/${Codes[placeName]}`}>Sky Scanner</a></div>
+                      <div style={{marginLeft:"15%"}}><a href={`${base_url}/${Codes[source]}/${Codes[placeName]}/${startdate}`} target=" ">
+                        {/* <div>Air India</div> */}
+                        <img src="airindia.png" alt="" width="60px"></img>
+                        </a></div>
+                      <div style={{marginLeft:"20%"}}><a target=" " href={`${base_url_sj}from=${Codes[source]}&to=${Codes[placeName]}&tripType=1&departure=${startdate}&adult=1&child=0&srCitizen=0&infant=0&currency=INR&redirectTo=/`}>
+                        <img src="spicejet.png" alt="" width="120px"></img></a></div>
+                    </div> 
+                    <div style={{display:"flex",marginTop:"10px"}}>
+                      <div style={{marginLeft:"10%"}}><a target=" " href={`https://www.skyscanner.co.in/transport/flights/${Codes[source]}/${Codes[placeName]}`}>
+                      <img src="skyscanner.png" alt="" width="120px"></img></a></div>
+                      <div style={{marginLeft:"20%"}}><a target=" " href={`${base_url_gofirst}o1=${Codes[source]}&d1=${Codes[placeName]}&ADT=1&dd1=${startdate}`}>
+                      <img src="gofirst.jpeg" alt="" width="60px"></img></a></div>
+                      
                     </div>
-                  </div>
+                    </div>
+                  {/* </div> */}
                   <div style={{textAlign:"left"}}>
                     <h3>Hotels in  {placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h3>
                     <div style={{display:"flex"}}>
-                      <div style={{marginLeft:"10px"}}><a href={`https://in.hotels.com/Hotel-Search?adults=1&children=&destination=${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`} target=" ">Hotels.com</a></div>
-                      <div style={{marginLeft:"10px"}}><a target=" " href={`https://www.airbnb.co.in/s/${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`}>Airbnb</a></div>
-                      <div style={{marginLeft:"10px"}}><a target=" " href={`https://www.holidify.com/places/${placeName}/hotels-where-to-stay.html`}>Holidify</a></div>
+                      <div style={{marginLeft:"10%"}}><a href={`https://in.hotels.com/Hotel-Search?adults=1&children=&destination=${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`} target=" ">
+                      <img src="hotels.jpeg" alt="" width="100px"></img></a></div>
+                      <div style={{marginLeft:"20%"}}><a target=" " href={`https://www.airbnb.co.in/s/${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`}>
+                      <img src="airbnb.png" alt="" width="60px" height="70px"></img></a></div>
+                    </div> 
+                    <div style={{display:"flex",marginTop:"10px"}}>
+                      <div style={{marginLeft:"10%"}}><a target=" " href={`https://www.holidify.com/places/${placeName}/hotels-where-to-stay.html`}>
+                      <img src="holidify.png" alt="" width="100px"></img></a></div>
+                      <div style={{marginLeft:"20%"}}><a href={`https://www.expedia.co.in/Hotel-Search?adults=2&destination=${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`} target=" ">
+                      <img src="expedia.jpeg" alt="" width="80px"></img></a></div>
                     </div>
                   </div>
+                  
                   <div>stay for {days} days</div>
 
                   <Map width="100%"/>
