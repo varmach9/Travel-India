@@ -5,6 +5,7 @@ import { PlaceContext } from "./Contexts/PlaceContext";
 import { Codes } from "./utilities/AirportCodes";
 import "./App.css";
 import axios from "axios";
+import GetPlan from "./utilities/GetPlan";
 
 const PlaceDetails = () => {
   const [showform, setshowform] = useState(1);
@@ -34,14 +35,14 @@ const base_url_gofirst="https://book.flygofirst.com/Flight/Select?s=True&"
 
   const animationsetter=()=>{
     var cardHeaders = document.querySelectorAll('.card-header');
-console.log("here1")
+// console.log("here1")
 
 cardHeaders.forEach(function(header) {
   header.addEventListener('click', function() {
     var target = this.dataset.target;
     var collapseItem = document.querySelector(target);
     var isActive = collapseItem.classList.contains('show');
-    console.log("here2")
+    // console.log("here2")
     if (isActive) {
       collapseItem.classList.remove('show');
     } else {
@@ -86,16 +87,16 @@ cardHeaders.forEach(function(header) {
   }, [placeName,showform]);
 
   useEffect(()=>{
-    console.log(placeName,"saaa")
-    console.log(placesData)
+    // console.log(placeName,"saaa")
+    // console.log(placesData)
     axios
     .get("https://aiweb-80256-default-rtdb.firebaseio.com/.json")
     .then(function (response) {
       const data = response.data;
       setplacesData(data[placeName])
-      console.log(data[placeName])
+      // console.log(data[placeName])
       setloaded(1)
-      console.log("loading set")
+      // console.log("loading set")
   })
   .catch(function(error) {
     console.log('Error reading data from Firebase Realtime Database:', error);
@@ -211,13 +212,46 @@ cardHeaders.forEach(function(header) {
           <div>
             {placeName !== "here" ? ( window.screen.width>1000 ?
             <div>
-              <div style={{color:"white",marginLeft:"12%",marginTop:"16%",position:"absolute",zIndex:1}}><h1 style={{fontSize:"50px",textAlign:"left"}}>{placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h1>
+              <div style={{color:"white",marginLeft:"12%",marginTop:"14%",position:"absolute",zIndex:1}}><h1 style={{fontSize:"50px",textAlign:"left"}}>{placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h1>
               <div style={{fontSize:'16px',textAlign:"left",width:"80%",color:"white"}}>{place_description.slice(0,584)}</div>
             </div>
-              <div ><img className="jj" src={(placeName==="hyderabad"||placeName==="mumbai"||placeName==="surat"|| placeName==="visakhapatnam"|| placeName==="thane")?imagelist["2"]:imagelist["0"]} alt="" width="80%" height="500px"></img></div>
-              <div style={{ display: "flex",marginLeft:"10%",marginTop:"50px"}}>
-                <div style={{ width: "330px"}}>
-                <div style={{textAlign:"left"}}>
+              <div ><img className="jj" src={(placeName==="hyderabad"||placeName==="mumbai"||placeName==="surat"|| placeName==="visakhapatnam"|| placeName==="thane")?imagelist["2"]:imagelist["0"]} alt="" width="80%" height="450px"></img></div>
+              
+              
+              <div style={{ display: "flex",marginLeft:"10%",marginTop:"20px"}}>
+                
+                <div style={{ width: "60%", marginRight: "5%",marginTop:"10px"}}>
+                  
+                  <div style={{display:`${window.screen.width>1400 ?"flex":""}`, border:"0.5px solid",padding:"10px"}}>
+                  <div style={{marginRight:"10px",marginLeft:"10px",width:"350px",textAlign:"left"}}>
+                    <h3 style={{color:"green",width:"350px"}}>Your {days} - day Plan is Here...</h3>
+                    {Array.apply(null, Array(days)).map((v,k)=>{return <div>day-{k+1}</div>})}
+                    {userChoices.length}
+                    <GetPlan place={placeName} days={days} choices={userChoices}></GetPlan>
+                  </div>
+                  <Map width={`${window.screen.width>1400 ?"350px":"100%"}`}/>
+                  </div>
+                  <div style={{justifyContent:"right",display:"flex",marginRight:"10px",marginTop:"20px"}}>
+                    <div style={{width:"100px",marginLeft:"10px"}}>Save this plan</div>
+                    <div style={{width:"100px",marginLeft:"10px"}}>Invite a friend</div>
+                    <div style={{width:"100px",marginLeft:"10px"}}>Download</div>
+                  </div>
+                  <h3 style={{textAlign:"left",color:"red",fontSize:"27px"}}>
+                    More About {placeName} ...
+                  </h3>
+                  <div className="dropdown-content" id="needdiv" style={{ textAlign: "left" }}>
+                    <div className="card"></div>
+                  </div>
+                  <div>
+                    <h3 style={{textAlign:"left",color:"red",fontSize:"27px"}}>Glimpse of {placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h3>
+                    {placestovisit!==""?<div style={{diaplay:"flex",flexWrap:"wrap"}}>{placestovisit.map((v,i)=>{return <div style={{width:"220px",float:"left",height:"230px"}}>
+                      <img src={imagelist[String(i)]} alt="" height="150px" width="200px"></img>
+                      <h4>{v}</h4>
+                      </div>})}</div>:<div></div>}
+                  </div>
+                </div>
+                <div style={{ width: "300px"}}>
+                <div style={{textAlign:"left",paddingLeft:"20px"}}>
                     <h3>Flights from {source} to {placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h3>
                     <div style={{display:"flex"}}>
                       <div style={{marginLeft:"30px"}}><a href={`${base_url}/${Codes[source]}/${Codes[placeName]}/${startdate}`} target=" ">
@@ -227,7 +261,7 @@ cardHeaders.forEach(function(header) {
                       <div style={{marginLeft:"50px"}}><a target=" " href={`${base_url_sj}from=${Codes[source]}&to=${Codes[placeName]}&tripType=1&departure=${startdate}&adult=1&child=0&srCitizen=0&infant=0&currency=INR&redirectTo=/`}>
                         <img src="spicejet.png" alt="" width="120px"></img></a></div>
                     </div> 
-                    <div style={{display:"flex",marginTop:"10px"}}>
+                    <div style={{display:"flex",marginTop:"10px",marginBottom:"50px"}}>
                       <div style={{marginLeft:"10px"}}><a target=" " href={`https://www.skyscanner.co.in/transport/flights/${Codes[source]}/${Codes[placeName]}`}>
                       <img src="skyscanner.png" alt="" width="120px"></img></a></div>
                       <div style={{marginLeft:"50px"}}><a target=" " href={`${base_url_gofirst}o1=${Codes[source]}&d1=${Codes[placeName]}&ADT=1&dd1=${startdate}`}>
@@ -235,7 +269,7 @@ cardHeaders.forEach(function(header) {
                       
                     </div>
                     </div>
-                  <div style={{textAlign:"left"}}>
+                  <div style={{textAlign:"left",paddingLeft:"20px"}}>
                     <h3>Hotels in  {placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h3>
                     <div style={{display:"flex"}}>
                       <div style={{marginLeft:"20px"}}><a href={`https://in.hotels.com/Hotel-Search?adults=1&children=&destination=${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`} target=" ">
@@ -243,7 +277,7 @@ cardHeaders.forEach(function(header) {
                       <div style={{marginLeft:"60px"}}><a target=" " href={`https://www.airbnb.co.in/s/${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`}>
                       <img src="airbnb.png" alt="" width="60px" height="70px"></img></a></div>
                     </div> 
-                    <div style={{display:"flex",marginTop:"10px"}}>
+                    <div style={{display:"flex",marginTop:"10px",marginBottom:"50px"}}>
                       <div style={{marginLeft:"20px"}}><a target=" " href={`https://www.holidify.com/places/${placeName}/hotels-where-to-stay.html`}>
                       <img src="holidify.png" alt="" width="100px"></img></a></div>
                       <div style={{marginLeft:"50px"}}><a href={`https://www.expedia.co.in/Hotel-Search?adults=2&destination=${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`} target=" ">
@@ -260,35 +294,6 @@ cardHeaders.forEach(function(header) {
                     <a href={`https://www.justdial.com/${placeName.charAt(0).toUpperCase() + placeName.slice(1)}/Car-Rental`} target=" ">
                       <img src="justdial.png" alt="" width="100px" style={{marginLeft:"20px"}}></img>
                     </a>
-                  </div>
-                </div>
-                <div style={{ width: "60%", marginLeft: "5%"}}>
-                  <div style={{justifyContent:"right",display:"flex",marginRight:"100px"}}>
-                    <div style={{width:"100px",marginLeft:"10px"}}>Save this plan</div>
-                    <div style={{width:"100px",marginLeft:"10px"}}>Invite a friend</div>
-                    <div style={{width:"100px",marginLeft:"10px"}}>Download</div>
-                  </div>
-                  <div style={{textAlign:"left"}}>Plan You trip from Start to End</div>
-                  <div style={{display:`${window.screen.width>1400 ?"flex":""}`}}>
-                  <div style={{marginRight:"10px",marginLeft:"1px",width:"380px",textAlign:"left"}}>
-                    <h3 style={{color:"green",width:"350px"}}>Your {days} - day Plan is Here...</h3>
-                    {Array.apply(null, Array(days)).map((v,k)=>{return <div>day-{k+1}</div>})}
-                    {userChoices.length}
-                  </div>
-                  <Map width={`${window.screen.width>1400 ?"350px":"100%"}`}/>
-                  </div>
-                  <h3 style={{textAlign:"left",color:"red"}}>
-                    More About {placeName} ...
-                  </h3>
-                  <div className="dropdown-content" id="needdiv" style={{ textAlign: "left" }}>
-                    <div className="card"></div>
-                  </div>
-                  <div>
-                    <h3 style={{textAlign:"left",color:"red"}}>Glimpse of {placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h3>
-                    {placestovisit!==""?<div style={{diaplay:"flex",flexWrap:"wrap"}}>{placestovisit.map((v,i)=>{return <div style={{width:"220px",float:"left",height:"230px"}}>
-                      <img src={imagelist[String(i)]} alt="" height="150px" width="200px"></img>
-                      <h4>{v}</h4>
-                      </div>})}</div>:<div></div>}
                   </div>
                 </div>
               </div>

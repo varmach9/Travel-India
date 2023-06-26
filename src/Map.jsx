@@ -6,7 +6,7 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 const Map = (props) => {
     const { placeName } = useContext(PlaceContext);
-    console.log("pppp", placeName);
+    // console.log("pppp", placeName);
   
     const markerCoordinates = useRef([]);
     const markernames = useRef([]);
@@ -15,7 +15,7 @@ const Map = (props) => {
     const markers = useRef([]);
   
     useEffect(() => {
-      console.log("start");
+      // console.log("start");
       axios
         .get("https://aiweb-80256-default-rtdb.firebaseio.com/.json")
         .then(function (response) {
@@ -27,7 +27,7 @@ const Map = (props) => {
             coordinates = data["coord"]["agra"];
           } else {
             coordinates = data["coord"][placeName];
-            console.log(data[placeName], "a");
+            // console.log(data[placeName], "a");
             for (let place in data[placeName]) {
               markerCoordinates.current.push(
                 data[placeName][place]["coordinates"]
@@ -35,7 +35,7 @@ const Map = (props) => {
               markernames.current.push(data[placeName][place]["name"])
             }
           }
-          console.log(markerCoordinates.current);
+          // console.log(markerCoordinates.current);
   
           if (mapInstance.current) {
             // Remove existing markers from the map
@@ -86,7 +86,7 @@ const Map = (props) => {
           <div style={{ marginTop: "10px" }}>  
             <div
               id="map"
-              style={{ height: "350px", width: props.width }}
+              style={{ height: "450px", width: props.width }}
               ref={mapRef}
             ></div>
           </div>

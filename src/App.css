@@ -43,8 +43,8 @@
 .search-bar1 {
   position: relative;
   display: inline-block;
+  font-size: 30px;
 }
-
 .suggestions {
   position: absolute;
   top: 100%;
@@ -158,24 +158,32 @@ div.card-body.article {
   border-radius: 16px;
 }
 .jj{
-  filter: brightness(70%);
+  filter: brightness(60%);
 }
 .jj:hover{
   filter: brightness(40%)
 }
 
-input[type="text"] {
+.input-box {
   padding: 10px;
   width: 220px;
   border: 1px solid #ccc;
   border-radius: 30px;
   font-size: 16px;
 }
+.input-box2 {
+  padding: 20px;
+  width: 320px;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  font-size: 20px;
+}
+
 
 @media screen and (max-width:700px) {
   input[type="text"] {
     padding: 10px 10px;
-    width: 100px;
+    width: 150px;
     border: 1px solid #ccc;
     border-radius: 30px;
     font-size: 16px;
@@ -191,6 +199,9 @@ input[type="text"] {
   border-radius: 30px;
   list-style-type: none;
   z-index: 2;
+}
+.suggestions2{
+  left:10%
 }
 
 .suggestions1 .suggestion {
@@ -213,7 +224,20 @@ button.b1{
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+button.b12{
+  padding: 5px 5px;
+  background-color: #75ea43;
+  border: none;
+  border-radius: 60px;
+  margin-left: 10px;
+  font-size: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 button.b1:hover {
+  background-color: green;
+}
+button.b12:hover {
   background-color: green;
 }
 
@@ -241,4 +265,126 @@ z-index: 1;
 .showa {
   display: none;
 }
+
+
+#tiles{
+  font-size: 14px;
+  font-family: 'Rubik-Regular';
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  box-sizing: border-box;
+  float: left;
+  background-color: #fff;
+  
+}
+
+.regions{
+  width: 80%;
+  margin: 0 auto;
+}
+
+.imageList{
+  font-size: 14px;
+  font-family: 'Rubik-Regular';
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  padding-bottom: 40px;
+}
+
+
+  /* Add a bottom border to the module heading */
+  .brd-btm-ctr {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background-color: #000;
+    border:"solid"
+  }
+
+  /* Style the image list */
+  .imageList {
+    padding-bottom: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    list-style: none;
+  }
+
+  /* Style each list item */
+  .imageList li {
+    width: calc(33% - 10px);
+    margin-bottom: 20px;
+  }
+  /* Style the figure element */
+  .imageList li figure {
+    position: relative;
+    width: 90%;
+    padding-bottom: 66.67%;
+    border:2px solid;
+    border-radius: 20px;
+    box-shadow: 0px 14px 15px 0px rgba(0,0,0,0.2);
+  }
+  .imageList li figure :hover{
+    box-shadow: 10px 24px 25px 10px rgba(0,0,0,0.2);
+    transition: box-shadow 0.3s ease;
+  }
+
+  /* Style the image within the figure */
+  .imageList li figure img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 20px;
+  }
+
+  /* Style the caption */
+  .caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: calc(100% - 20px);
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 20px;
+  }
+
+  .imageList li:hover .caption {
+    opacity: 1;
+  }
+
+  /* Responsive Styles */
+
+  @media (max-width: 768px) {
+    /* Medium size screens */
+    .imageList li {
+      width: calc(50% - 10px);
+      
+    }
+    .regions{
+      width: 80%;
+      margin: 0 0;
+    }
+  }
+
+  @media (max-width: 576px) {
+    /* Mobile screens */
+    .imageList li {
+      width: 100%;
+    }
+  }
 

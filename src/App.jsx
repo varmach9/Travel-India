@@ -18,7 +18,7 @@ function App() {
   const [user,setUser]=useState({name:"undefined"})
   const [userName,setUserName]=useState("undefined")
   const [placeName,setPlaceName]=useState("kolkata")
-  const [page,setpage]=useState(2)
+  const [page,setpage]=useState(1)
 
   function handlecallbackresponse(res){
     var userObject=jwt_decode(res.credential)
@@ -55,9 +55,9 @@ function App() {
       <PlaceContext.Provider value={{placeName,setPlaceName}}>
       <PageContext.Provider value={{page,setpage}}> <div>
       <div style={{display:"flex",marginLeft:`${window.screen.width>1000 ?"10%":"0"}`,marginTop:"10px",height:"45px",marginBottom:`${window.screen.width>1000 ?"20px":"10px"}`}}>
-      <img src="travelindialogo.png" alt="" width={`${window.screen.width>1000 ?"140px":"80px"}`} height={`${window.screen.width>1000 ?"50px":"40px"}`} style={{borderRadius:"20px",marginRight:"20px"}}></img>
+      <img src="travelindialogo.png" alt="" width={`${window.screen.width>1000 ?"140px":"30px"}`} height={`${window.screen.width>1000 ?"50px":"40px"}`} style={{borderRadius:"20px",marginRight:"20px"}}></img>
       <div id="signInDiv"></div>
-      {(user.name==="undefined" || window.screen.width<=800) &&  <div style={{justifyContent:"right",display:"flex",width:"60%",paddingTop:"10px"}}><SearchBar></SearchBar></div>}
+      {(user.name==="undefined" || window.screen.width<=800) &&  <div style={{justifyContent:"right",display:"flex",width:`${window.screen.width>1000 ?"50%":"80%"}`,paddingTop:`${window.screen.width>1000 ?"10px":"5px"}`}}><SearchBar></SearchBar></div>}
       
       {(user.name!=="undefined") && 
         <div style={{display:"flex",width:`${window.screen.width>1000 ?"70%":"20%"}`, justifyContent:"right",marginTop:`${window.screen.width>1000 ?"10px":"0px"}`}}>
@@ -70,11 +70,8 @@ function App() {
         </div>
         <hr style={{width:`${window.screen.width>1000 ?"85%":"100%"}`}}></hr>
 
-      </div> 
-      <div>
-          {page===1?<Home/>:page===2?<PlannerPage/>:<PastPlans/>}
-        
       </div>
+          {page===1?<Home/>:page===2?<PlannerPage/>:<PastPlans/>}
 
 
      <div>footer</div>
