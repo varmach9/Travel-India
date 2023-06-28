@@ -13,7 +13,6 @@ function Plan() {
   const [plans,setplans]=useState([])
   const {setpage}=useContext(PageContext)
   const {setpage3data}=useContext(Page3dataContext)
-
   useEffect(()=>{
     axios.get(`${databaseURL}${userName}.json`)
   .then(response => {
@@ -65,14 +64,35 @@ function Plan() {
             {userName}'s <div>travel plans:</div>
           
           {plans!==[] &&  
-          (Object.keys(plans)).map((plan)=>{
+          (Object.keys(plans)).map((plan,k)=>{
             if(plans[plan]["content"]==="07/07/2023"){return <div></div>}
-            return <div onClick={()=>{
+            return <div id={`${k}`} onClick={()=>{
             setpage3data(plans[plan]["content"])
             setpage(3)
-          }} style={{marginTop:"15px",color:"green",fontSize:"15px"}}>{plans[plan]["days"]}-day {plans[plan]["place"]} Trip</div>})
-        
-          }
+          }} style={{marginTop:"10px",color:"green",fontSize:"12px"}}>{plans[plan]["days"]}-day {plans[plan]["place"]} Trip <button onClick={(e)=>{
+            
+            axios.get(`${databaseURL}${userName}/plans.json`)
+              .then(response => {
+                console.log(response.data,plan)
+                if (response.data && response.data.hasOwnProperty(plan)) {
+                  delete response.data[plan];
+                  axios.put(`${databaseURL}${userName}/plans.json`, response.data)
+                    .then(response => {
+                      console.log('Key-value pair deleted successfully');
+                      document.getElementById(`${k}`).style.display="none"
+                    })
+                    .catch(error => {
+                      console.error('Error updating data:', error);
+                    });
+                } else {
+                  console.log('Either the parent key does not exist or the nested key is not present');
+                }
+  })
+  .catch(error => {
+    console.error('Error fetching data:', error);
+  });
+            e.stopPropagation();
+          }}>x</button></div>})}
           </div>)
         ) : (
         expanded && (

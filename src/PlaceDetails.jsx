@@ -43,6 +43,7 @@ const PlaceDetails = () => {
       axios.patch(`${databaseURL}${userName}/${"plans"}.json`, updatedData)
         .then(response => {
           console.log('Object updated successfully');
+          alert('plan saved')
         })
         .catch(error => {
           console.error('Error updating object:', error);
@@ -352,13 +353,13 @@ cardHeaders.forEach(function(header) {
                   </div>
                   
                   <div style={{display:`${window.screen.width>1400 ?"flex":""}`, border:"0.5px solid",padding:"10px"}}>
-                  <div style={{marginRight:"10px",marginLeft:"10px",textAlign:"left"}}>
+                  <div id="catch-content" style={{marginRight:"10px",marginLeft:"10px",textAlign:"left"}}>
                     <h3 style={{color:"green",width:"350px"}}>Your {days} - day Plan is Here...</h3>
                     <GetPlan place={placeName} days={days} choices={userChoices} startdate={startdate}></GetPlan>
                   </div>
                   <Map width={`${window.screen.width>1400 ?"350px":"100%"}`}/>
                   </div>
-                  <div style={{justifyContent:"right",display:"flex",marginRight:"10px",marginTop:"20px"}}>
+                  <div  style={{justifyContent:"right",display:"flex",marginRight:"10px",marginTop:"20px"}}>
                     <div onClick={planSaver}  className="saver" style={{width:"100px",marginLeft:"10px",backgroundColor:"#dfe8f7",border:"0.25px solid",padding:"5px"}}>Save this plan</div>
                   </div>
                   <h3 style={{textAlign:"left",color:"red"}}>
