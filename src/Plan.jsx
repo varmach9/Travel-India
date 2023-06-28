@@ -83,6 +83,7 @@ function Plan() {
                   axios.put(`${databaseURL}${userName}/plans.json`, response.data)
                     .then(response => {
                       console.log('Key-value pair deleted successfully');
+                      alert("past plan is deleted")
                       document.getElementById(`${k}`).style.display="none"
                     })
                     .catch(error => {
