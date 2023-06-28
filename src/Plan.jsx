@@ -22,7 +22,10 @@ function Plan() {
   }
     catch(e){console.log(e)}
   })
+  setShowNumber(1)
+  setExpanded(false)
   },[userName])
+
 
 
   const handleImageClick = () => {
@@ -63,9 +66,10 @@ function Plan() {
           fontWeight:"bolder"}}>
             {userName}'s <div>travel plans:</div>
           
-          {plans!==[] &&  
-          (Object.keys(plans)).map((plan,k)=>{
+          {plans!==[] && 
+           (Object.keys(plans)).map((plan,k)=>{
             if(plans[plan]["content"]==="07/07/2023"){return <div></div>}
+            try{
             return <div id={`${k}`} onClick={()=>{
             setpage3data(plans[plan]["content"])
             setpage(3)
@@ -87,12 +91,16 @@ function Plan() {
                 } else {
                   console.log('Either the parent key does not exist or the nested key is not present');
                 }
-  })
-  .catch(error => {
-    console.error('Error fetching data:', error);
-  });
+            })
+            .catch(error => {
+              console.error('Error fetching data:', error);
+            });
             e.stopPropagation();
-          }}>x</button></div>})}
+          }}>x</button></div>}catch(e){
+            console.log("clicked way too fast")
+          }
+        }
+          )}
           </div>)
         ) : (
         expanded && (
