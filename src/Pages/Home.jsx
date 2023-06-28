@@ -1,12 +1,11 @@
 import React from 'react'
 import Plan from '../Plan'
 import SearchBar2 from '../SearchBar2'
-
 const Home = () => {
-  console.log("home")
+//   console.log("home")
   return (
     <div>
-    <div style={{display:"flex",height:`${window.screen.width*0.4}px`}}>
+    {window.screen.width>700?<div style={{display:"flex",height:`${window.screen.width*0.4}px`}}>
       <div style={{width:'20%',paddingLeft:"5%"}}><Plan/></div>
       <div style={{width:"70%"}}>
         <div style={{backgroundImage: "url(homebanner2.gif)", backgroundSize:"100%",width:"100%",height:"60%",margin:"auto",paddingTop:"15%"}}>
@@ -14,7 +13,16 @@ const Home = () => {
         </div>
         
       </div>
+      </div>:<div><div style={{display:"flex",height:`${window.screen.width*0.6}px`}}>
+      {/* <div style={{width:'20%',paddingLeft:"5%"}}><Plan/></div> */}
+      <div style={{width:"100%"}}>
+        <div style={{backgroundImage: "url(homebanner2.gif)", backgroundSize:"100%",width:"100%",height:"60%",margin:"auto",paddingTop:"15%"}}>
+           <SearchBar2></SearchBar2>
+        </div>
       </div>
+	  </div>
+	  <div style={{width:'80%',paddingLeft:"5%",height:"300px"}}><Plan/></div>
+      </div>}
 
       {/* inspired from yatra.com */}
       <div class="full oddEven" id="tiles">

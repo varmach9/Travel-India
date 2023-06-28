@@ -1,11 +1,30 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { LoginContext } from "./Contexts/LoginContext";
 import "./App.css";
+import axios from "axios";
+import { PageContext } from "./Contexts/PageContext";
+import { Page3dataContext } from "./Contexts/Page3dataContext";
+const databaseURL = 'https://datausers-3257c-default-rtdb.firebaseio.com/'
 
 function Plan() {
   const { userName } = useContext(LoginContext);
   const [expanded, setExpanded] = useState(false);
   const [showNumber, setShowNumber] = useState(true);
+  const [plans,setplans]=useState([])
+  const {setpage}=useContext(PageContext)
+  const {setpage3data}=useContext(Page3dataContext)
+
+  useEffect(()=>{
+    axios.get(`${databaseURL}${userName}.json`)
+  .then(response => {
+    try{
+      setplans(response.data["plans"])
+    console.log(response.data["plans"])
+  }
+    catch(e){console.log(e)}
+  })
+  },[userName])
+
 
   const handleImageClick = () => {
     setExpanded(!expanded);
@@ -29,7 +48,7 @@ function Plan() {
         backgroundImage: "url(plans.png)",
         backgroundSize: "100%",
         backgroundRepeat: "no-repeat",
-        height: expanded ? "89%" : `${window.screen.width * 0.03}px`,
+        height:  window.screen.width>700 ? (expanded ? "89%" : `${window.screen.width * 0.03}px`):(expanded ? "100%" : `${window.screen.width *0.09}px`),
         marginTop: "20px",
         transition: "height 1s ease",
         backgroundPosition: expanded ? "" : "top"
@@ -39,17 +58,26 @@ function Plan() {
     >
       {userName !== "undefined" ? (
         expanded && (
-          <div style={{ paddingTop: "20%", fontSize: `${window.screen.width * 0.01}px`,
+          <div style={{ paddingTop: "20%", 
+          fontSize: window.screen.width>700 ? `${window.screen.width * 0.01}px`:`${window.screen.width * 0.025}px`,
           color:"darkblue",
           fontWeight:"bolder"}}>
             {userName}'s <div>travel plans:</div>
+          
+          {plans!==[] &&  
+          (Object.keys(plans)).map((plan)=>{return <div onClick={()=>{
+            setpage3data(plans[plan]["content"])
+            setpage(3)
+          }} style={{marginTop:"15px",color:"green",fontSize:"15px"}}>{plans[plan]["days"]}-day {plans[plan]["place"]} Trip</div>})
+        
+          }
           </div>)
         ) : (
         expanded && (
           <div
             style={{
               paddingTop: "20%",
-              fontSize: `${window.screen.width * 0.01}px`,
+              fontSize: window.screen.width>700 ? `${window.screen.width * 0.01}px`:`${window.screen.width * 0.025}px`,
               color:"black",
               fontWeight:"bolder"
             }}
@@ -63,13 +91,13 @@ function Plan() {
           <div
             style={{
               paddingTop: "3%",
-              fontSize: `${window.screen.width * 0.01}px`,
+              fontSize: window.screen.width>700 ? `${window.screen.width * 0.01}px`:`${window.screen.width * 0.025}px`,
               color:"darkred",
               fontWeight:"bolder"
             }}
           >Click to View Your Past Plans</div>
           
-          {showNumber && <div style={{ marginTop: "25%" ,justifyContent:"left"}} onClick={handleCityClick}>
+          {showNumber && <div style={{ marginTop: "15%" ,justifyContent:"left"}} onClick={handleCityClick}>
             
             {window.screen.width>1400?<div><h3 style={{textAlign:"left",marginLeft:"30px"}}>Travel India with us</h3>
             
@@ -85,7 +113,7 @@ function Plan() {
               <a href="https://en.wikipedia.org/wiki/Agra" target=" "><img style={{marginRight:"20px",borderRadius:"50%",border:"0.5px solid"}} src="agra.jpeg" alt="" width="100px"></img></a>
               <a href="https://en.wikipedia.org/wiki/Jaipur" target=" "><img style={{marginRight:"10px",borderRadius:"50%",border:"0.5px solid"}} src="jaipur.png" alt="" width="100px" height="100px"></img></a>
             </div></div>:<div>
-            <img src="allcities.png" alt="" width={`${window.screen.width*0.17}px`}></img>
+            <img src="allcities.png" alt="" width={window.screen.width>700 ? `${window.screen.width*0.17}px`:"40%"}></img>
             </div>}
             
             
