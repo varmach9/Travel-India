@@ -84,7 +84,7 @@ axios.get(`${databaseURL}${key}.json`)
     setpage(1)
   }}><img src="home.png" alt="" width="50px"></img></div>
       <div style={{display:"flex",marginLeft:`${window.screen.width>1000 ?"10%":"0"}`,marginTop:"10px",height:"45px",marginBottom:`${window.screen.width>1000 ?"20px":"10px"}`}}>
-      <img src="travelindialogo.png" alt="" width={`${window.screen.width>1000 ?"140px":"50px"}`} height={`${window.screen.width>1000 ?"50px":"40px"}`} style={{borderRadius:"20px",marginRight:"20px"}}></img>
+      <img onClick={()=>{setpage(1)}} src="travelindialogo.png" alt="" width={`${window.screen.width>1000 ?"140px":"50px"}`} height={`${window.screen.width>1000 ?"50px":"40px"}`} style={{borderRadius:"20px",marginRight:"20px"}}></img>
       <div id="signInDiv"></div>
       {(user.name==="undefined" || window.screen.width<=800) &&  <div style={{justifyContent:"right",display:"flex",width:`${window.screen.width>1000 ?"50%":"80%"}`,paddingTop:`${window.screen.width>1000 ?"10px":"5px"}`}}><SearchBar></SearchBar></div>}
       

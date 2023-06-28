@@ -65,7 +65,9 @@ function Plan() {
             {userName}'s <div>travel plans:</div>
           
           {plans!==[] &&  
-          (Object.keys(plans)).map((plan)=>{return <div onClick={()=>{
+          (Object.keys(plans)).map((plan)=>{
+            if(plans[plan]["content"]==="07/07/2023"){return <div></div>}
+            return <div onClick={()=>{
             setpage3data(plans[plan]["content"])
             setpage(3)
           }} style={{marginTop:"15px",color:"green",fontSize:"15px"}}>{plans[plan]["days"]}-day {plans[plan]["place"]} Trip</div>})
