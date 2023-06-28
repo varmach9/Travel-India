@@ -1,5 +1,6 @@
 import { useEffect,useState } from 'react';
 import './App.css';
+import Footer from './Footer';
 
 // import context
 import {LoginContext} from "./Contexts/LoginContext"
@@ -100,10 +101,11 @@ axios.get(`${databaseURL}${key}.json`)
         <hr style={{width:`${window.screen.width>1000 ?"85%":"100%"}`}}></hr>
 
       </div>
+      <div style={{minHeight:"500px"}}>
           {page===1?<Home/>:page===2?<PlannerPage/>:<PastPlans/>}
+      </div>
 
-
-     <div>footer</div>
+     <div style={{}}><Footer></Footer></div>
      </Page3dataContext.Provider>
      </PageContext.Provider>
      </PlaceContext.Provider>

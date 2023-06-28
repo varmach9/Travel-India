@@ -461,7 +461,7 @@ z-index: 1;
     background-color:blue;
     color: #fff;
     border-radius: 50%;
-    z-index: 22;
+    z-index: 1000;
   } 
 
   .saver{

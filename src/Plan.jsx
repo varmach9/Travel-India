@@ -13,6 +13,7 @@ function Plan() {
   const [plans,setplans]=useState([])
   const {setpage}=useContext(PageContext)
   const {setpage3data}=useContext(Page3dataContext)
+  const [change,setchange]=useState(0)
   useEffect(()=>{
     axios.get(`${databaseURL}${userName}.json`)
   .then(response => {
@@ -24,7 +25,7 @@ function Plan() {
   })
   setShowNumber(1)
   setExpanded(false)
-  },[userName])
+  },[userName,change])
 
 
 
@@ -84,6 +85,7 @@ function Plan() {
                     .then(response => {
                       console.log('Key-value pair deleted successfully');
                       alert("past plan is deleted")
+                      setchange(change+1)
                       document.getElementById(`${k}`).style.display="none"
                     })
                     .catch(error => {
