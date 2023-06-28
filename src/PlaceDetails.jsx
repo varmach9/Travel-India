@@ -358,6 +358,9 @@ cardHeaders.forEach(function(header) {
                   </div>
                   <Map width={`${window.screen.width>1400 ?"350px":"100%"}`}/>
                   </div>
+                  <div style={{justifyContent:"right",display:"flex",marginRight:"10px",marginTop:"20px"}}>
+                    <div onClick={planSaver}  className="saver" style={{width:"100px",marginLeft:"10px",backgroundColor:"#dfe8f7",border:"0.25px solid",padding:"5px"}}>Save this plan</div>
+                  </div>
                   <h3 style={{textAlign:"left",color:"red"}}>
                     More About {placeName} from internet
                   </h3>
@@ -367,6 +370,16 @@ cardHeaders.forEach(function(header) {
                 </div>
                 <div style={{ width: "100%" }}>
                   <Weather/>
+                  <div style={{textAlign:"left",marginTop:"20px",marginLeft:"30px"}}>
+                    <h3>Other Activities</h3>
+                    <div style={{marginBottom:"20px"}}>Car Rental</div>
+                    <a href={`https://www.expedia.com/carsearch?date1=6/29/2023&date2=7/2/2023&drid1=&loc2=&locn=${placeName.charAt(0).toUpperCase() + placeName.slice(1)}`} target=" ">
+                      <img src="expediacars.png" alt="" width="100px"></img>
+                    </a>
+                    <a href={`https://www.justdial.com/${placeName.charAt(0).toUpperCase() + placeName.slice(1)}/Car-Rental`} target=" ">
+                      <img src="justdial.png" alt="" width="100px" style={{marginLeft:"20px"}}></img>
+                    </a>
+                  </div>
                   <div>
                     <h3 style={{textAlign:"left",color:"red"}}>Glimpse of {placeName.charAt(0).toUpperCase() + placeName.slice(1)}</h3>
                     {placestovisit!==""?<div style={{diaplay:"flex",flexWrap:"wrap"}}>{placestovisit.map((v,i)=>{return <div style={{width:"100%",float:"left"}}>

@@ -211,7 +211,7 @@ div.card-body.article {
 @media screen and (max-width:700px) {
   input[type="text"] {
     padding: 10px 10px;
-    width: 150px;
+    width: 130px;
     border: 1px solid #ccc;
     border-radius: 30px;
     font-size: 16px;
