@@ -216,7 +216,7 @@ cardHeaders.forEach(function(header) {
               
             </div>
             {Object.keys(Codes).includes(sourcesetter) ? (
-              <input type="submit" value="Submit" />
+              <input type="submit" value="Submit"  style={{fontSize:"20px",margin:"30px",padding:"10px"}}/>
             ) : (
               <div> </div>
             )}
@@ -363,7 +363,7 @@ cardHeaders.forEach(function(header) {
                     <div onClick={planSaver}  className="saver" style={{width:"100px",marginLeft:"10px",backgroundColor:"#dfe8f7",border:"0.25px solid",padding:"5px"}}>Save this plan</div>
                   </div>
                   <h3 style={{textAlign:"left",color:"red"}}>
-                    More About {placeName} from internet
+                    More About {placeName} 
                   </h3>
                   <div className="dropdown-content" id="needdiv" style={{ textAlign: "left" }}>
                     <div className="card"></div>
